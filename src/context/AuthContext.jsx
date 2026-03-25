@@ -1,9 +1,14 @@
 import { useContext, useState, createContext, useEffect } from "react";
 import supabase from "../utils/supabaseClient";
 
-const AuthContext = createContext();
 
-export const useAuth = () => useContext(AuthContext);
+export const AuthContext = createContext();
+
+export const useAuth = () => {
+    const context = useContext(AuthContext);
+    if (!context) throw new Error("useAuth must be used inside AuthProvider");
+    return context;
+}
 
 export default function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
