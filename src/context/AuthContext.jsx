@@ -21,8 +21,12 @@ export default function AuthProvider({ children }) {
         return () => subscription.unsubscribe();
     }, []);
 
+    const login = (email, password) => supabase.auth.signInWithPassword({ email, password });
+
+    const logout = () => supabase.auth.signOut();
+
     return (
-        <AuthContext.Provider value={{ session, user, loading }}>
+        <AuthContext.Provider value={{ login, logout, session, user, loading }}>
             {children}
         </AuthContext.Provider>
     );
