@@ -13,20 +13,24 @@ export default function Login() {
 
 
     return (<>
-        <div className="flex min-h-full flex-col items-center justify-center h-screen px-6 py-12 lg:px-8">
+        <div className="flex min-h-full flex-col items-center justify-center h-screen px-6 py-12 lg:px-8 border-2 border-solid border-gray-500">
             <h1 className="font-serif"> Welcome.</h1>
             <h3 className="font-sans"> Sign in to your workspace</h3>
             <form action="#" method="POST" className="space-y-6">
                 <div>
-                    <label>Email</label>
-                    <input type="email" value={email} placeholder="you@example.com" onChange={(e) => setEmail(e.target.value)} required />
+                    <label className="font-mono block text-sm/6 text-gray-500">WORK EMAIL</label>
+                    <input className="border border-gray-300 rounded-md p-2 w-full transition duration-150 ease-in-out
+         dark:bg-gray-800 dark:border-gray-700 dark:text-white
+         focus:outline-none focus:ring-2 focus:ring-gray-600" type="email" value={email} placeholder="you@example.com" onChange={(e) => setEmail(e.target.value)} required />
                 </div>
                 <div>
-                    <label>Password</label>
-                    <input type="password" value={password} onChange={(e) => setEmail(e.target.value)} required />
+                    <label className="font-mono block text-sm/6 text-gray-500">PASSWORD</label>
+                    <input className="border border-gray-300 rounded-md p-2 w-full transition duration-150 ease-in-out
+         dark:bg-gray-800 dark:border-gray-700 dark:text-white
+         focus:outline-none focus:ring-2 focus:ring-gray-600" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
                 </div>
 
-                <button className=" flex w-full justify-center rounded-md bg-indigo-500 px-6 py-1.5 text-sm/6 font-semibold text-white hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500" type="submit" disabled={loading}>{
+                <button className=" flex w-full justify-center rounded-md bg-white-500 text-gray-500 hover:bg-gray-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-500" type="submit" disabled={loading}>{
                     loading ? 'Signing in...' : 'Sign in'}</button>
             </form>
             <p>
