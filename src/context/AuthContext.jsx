@@ -11,7 +11,6 @@ export const useAuth = () => {
 }
 
 export default function AuthProvider({ children }) {
-    console.log("AuthProvider is mounting")
     const [user, setUser] = useState(null);
     const [session, setSession] = useState(null);
     const [loading, setLoading] = useState(true);

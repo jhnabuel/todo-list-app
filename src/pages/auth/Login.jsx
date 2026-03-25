@@ -13,19 +13,21 @@ export default function Login() {
 
 
     return (<>
-        <div>
-            <h1> Sign in</h1>
-            <form>
+        <div className="flex min-h-full flex-col items-center justify-center h-screen px-6 py-12 lg:px-8">
+            <h1 className="font-serif"> Welcome.</h1>
+            <h3 className="font-sans"> Sign in to your workspace</h3>
+            <form action="#" method="POST" className="space-y-6">
                 <div>
                     <label>Email</label>
-                    <input type="email" value={email} placeholder="you@example.com" required />
+                    <input type="email" value={email} placeholder="you@example.com" onChange={(e) => setEmail(e.target.value)} required />
                 </div>
                 <div>
                     <label>Password</label>
-                    <input type="password" value={password} required />
+                    <input type="password" value={password} onChange={(e) => setEmail(e.target.value)} required />
                 </div>
 
-                <button type="submit" disabled={loading}>{loading ? 'Signing in...' : 'Sign in'}</button>
+                <button className=" flex w-full justify-center rounded-md bg-indigo-500 px-6 py-1.5 text-sm/6 font-semibold text-white hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500" type="submit" disabled={loading}>{
+                    loading ? 'Signing in...' : 'Sign in'}</button>
             </form>
             <p>
                 No account? <Link to="/signup">Create one</Link>
