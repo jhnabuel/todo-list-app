@@ -36,7 +36,7 @@ export default function Login() {
                 <h1 className="font-serif text-2xl text-stone-900 text-center tracking-tight mb-1"> Welcome.</h1>
                 <h3 className="font-sans text-sm text-stone-400 text-center mb-7"> Sign in to your workspace</h3>
 
-                <form action="#" method="POST" className="space-y-6">
+                <form onSubmit={handleLogin} className="space-y-6">
                     <div>
                         <label className="font-mono block text-[10.5px] uppercase tracking-widest text-stone-400 mb-1.5">Work Email</label>
                         <input className="w-full px-3 py-2 text-sm text-stone-900 bg-stone-50 border border-stone-200 rounded-lg outline-none transition-all duration-150 placeholder:text-stone-300 focus:bg-white focus:border-stone-900 focus:ring-3 focus:ring-stone-900/6"
