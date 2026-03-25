@@ -11,6 +11,22 @@ export default function Login() {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
 
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        setError(null);
+        setLoading(true);
+
+        const { error } = await login(email, password);
+
+        if (error) {
+            setError(error)
+            setLoading(false)
+            return;
+        }
+
+        navigate('/dashboard')
+    };
+
 
     return (<>
         <div className="flex min-h-screen flex-col items-center justify-center bg-stone-50 px-6">
