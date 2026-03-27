@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import supabase from '../../utils/supabaseClient';
 
+
 export default function Signup() {
     const navigate = useNavigate();
 
@@ -14,8 +15,46 @@ export default function Signup() {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
 
+    const handleSignUp = async (e) => {
+        e.preventDefault();
+        setError(null);
+        if (password !== confirmPassword) {
+            setError('Passwords do not match.');
+            return;
+        }
 
+        setLoading(true);
 
+        const { error } = await supabase.auth.signUp({
+            email, password,
+            options: {
+                data: {
+                    first_name: firstName,
+                    last_name: lastName
+                }
+            }
+        });
+
+        if (error) {
+            setError(error.message);
+            setLoading(false);
+            return;
+        }
+
+        setConfirmed(true);
+        setLoading(false);
+    }
+
+    if (confirmed) {
+        return (
+            <div>
+                <h1>Check your email</h1>
+                <p>We sent a confirmation link to <strong>{email}</strong>.</p>
+                <p>Click it to activate your account then sign in.</p>
+                <Link to="/login">Back to sign in</Link>
+            </div>
+        );
+    }
     return (
         <>
             <div className="flex min-h-screen flex-col items-center justify-center bg-stone-50 px-6">
@@ -24,7 +63,7 @@ export default function Signup() {
                     <h1 className="font-serif text-2xl text-stone-900 text-center tracking-tight mb-1">Create account</h1>
                     <h3 className="font-sans text-sm text-stone-400 text-center mb-7"> Start managing work that matters</h3>
 
-                    <form className="space-y-3">
+                    <form className="space-y-3" onSubmit={handleSignUp}>
                         <div className="flex justify-between gap-3">
                             <div>
                                 <label className="cred-label">First Name</label>
