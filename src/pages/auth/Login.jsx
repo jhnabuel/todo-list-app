@@ -51,6 +51,7 @@ export default function Login() {
                         <input className="w-full px-3 py-2 text-sm text-stone-900 bg-stone-50 border border-stone-200 rounded-lg outline-none transition-all duration-150 placeholder:text-stone-300 focus:bg-white focus:border-stone-900 focus:ring-3 focus:ring-stone-900/6"
                             type="password"
                             value={password}
+                            placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
                             onChange={(e) => setPassword(e.target.value)}
                             required />
                     </div>
