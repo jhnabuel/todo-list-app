@@ -28,31 +28,65 @@ export default function Signup() {
                         <div className="flex justify-between gap-3">
                             <div>
                                 <label className="cred-label">First Name</label>
-                                <input type="text" className="cred-form" value={firstName} onChange={(e) => { e.target.value }} placeholder="John" required />
+                                <input type="text"
+                                    className="cred-input"
+                                    value={firstName}
+                                    onChange={(e) => { setFirstName(e.target.value) }}
+                                    placeholder="John"
+                                    required />
                             </div>
 
                             <div>
                                 <label className="cred-label">Last Name</label>
-                                <input type="text " className="cred-form" value={lastName} onChange={(e) => { e.target.value }} placeholder="Doe" required />
+                                <input type="text"
+                                    className="cred-input"
+                                    value={lastName}
+                                    onChange={(e) => { e.target.value }}
+                                    placeholder="Doe"
+                                    required />
                             </div>
                         </div>
 
                         <div>
                             <label className="cred-label">Work Email</label>
-                            <input type="email" className="cred-form" value={email} onChange={(e) => { e.target.value }} placeholder="you@example.com" required />
+                            <input type="email"
+                                className="cred-input"
+                                value={email}
+                                autoComplete="email"
+                                onChange={(e) => { e.target.value }}
+                                placeholder="you@example.com"
+                                required />
                         </div>
 
                         <div>
                             <label className="cred-label">Password</label>
-                            <input type="password" className="cred-form" value={password} onChange={(e) => { e.target.value }} placeholder="Must have at least 6 characters" required />
+                            <input type="password"
+                                className="cred-input"
+                                value={password}
+                                autoComplete="new-password"
+                                onChange={(e) => { e.target.value }}
+                                placeholder="Must have at least 6 characters"
+                                required />
                         </div>
 
                         <div>
                             <label className="cred-label">Confirm Password</label>
-                            <input type="password" className="cred-form" value={confirmPassword} onChange={(e) => { e.target.value }} placeholder="Confirm your password" required />
+                            <input type="password"
+                                className="cred-input"
+                                value={confirmPassword}
+                                autoComplete="new-password"
+                                onChange={(e) => { e.target.value }}
+                                placeholder="Confirm your password"
+                                required />
                         </div>
 
-                        <button className="cred-button"
+                        {error && (
+                            <p className="text-xs text-red-600 bg-red-50 border border-red-100 px-3 py-2 rounded-lg">
+                                {error}
+                            </p>
+                        )}
+
+                        <button className="cred-btn"
                             type="submit"
                             disabled={loading}>
                             {loading ? 'Signing in...' : 'Sign up'}

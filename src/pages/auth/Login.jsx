@@ -38,19 +38,21 @@ export default function Login() {
 
                 <form onSubmit={handleLogin} className="space-y-6">
                     <div>
-                        <label className="font-mono block text-[10.5px] uppercase tracking-widest text-stone-400 mb-1.5">Work Email</label>
-                        <input className="w-full px-3 py-2 text-sm text-stone-900 bg-stone-50 border border-stone-200 rounded-lg outline-none transition-all duration-150 placeholder:text-stone-300 focus:bg-white focus:border-stone-900 focus:ring-3 focus:ring-stone-900/6"
+                        <label className="cred-label">Work Email</label>
+                        <input className="cred-input"
                             type="email"
                             value={email}
+                            autoComplete="email"
                             placeholder="you@example.com"
                             onChange={(e) => setEmail(e.target.value)}
                             required />
                     </div>
                     <div>
-                        <label className="font-mono block text-[10.5px] uppercase tracking-widest text-stone-400 mb-1.5">Password</label>
-                        <input className="w-full px-3 py-2 text-sm text-stone-900 bg-stone-50 border border-stone-200 rounded-lg outline-none transition-all duration-150 placeholder:text-stone-300 focus:bg-white focus:border-stone-900 focus:ring-3 focus:ring-stone-900/6"
+                        <label className="cred-label">Password</label>
+                        <input className="cred-input"
                             type="password"
                             value={password}
+                            autoComplete="current-password"
                             placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
                             onChange={(e) => setPassword(e.target.value)}
                             required />
@@ -68,7 +70,7 @@ export default function Login() {
                         </Link>
                     </div>
 
-                    <button className=" w-full py-2.5 px-4 bg-stone-900 text-white text-sm font-medium rounded-lg transition-all duration-150 hover:bg-stone-700 active:scale-99 disabled:opacity-50 disabled:cursor-not-allowed"
+                    <button className="cred-btn"
                         type="submit"
                         disabled={loading}>
                         {loading ? 'Signing in...' : 'Sign in'}
