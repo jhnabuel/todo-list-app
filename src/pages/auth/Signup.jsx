@@ -41,7 +41,7 @@ export default function Signup() {
                                 <input type="text"
                                     className="cred-input"
                                     value={lastName}
-                                    onChange={(e) => { e.target.value }}
+                                    onChange={(e) => { setLastName(e.target.value) }}
                                     placeholder="Doe"
                                     required />
                             </div>
@@ -53,7 +53,7 @@ export default function Signup() {
                                 className="cred-input"
                                 value={email}
                                 autoComplete="email"
-                                onChange={(e) => { e.target.value }}
+                                onChange={(e) => { setEmail(e.target.value) }}
                                 placeholder="you@example.com"
                                 required />
                         </div>
@@ -64,7 +64,7 @@ export default function Signup() {
                                 className="cred-input"
                                 value={password}
                                 autoComplete="new-password"
-                                onChange={(e) => { e.target.value }}
+                                onChange={(e) => { setPassword(e.target.value) }}
                                 placeholder="Must have at least 6 characters"
                                 required />
                         </div>
@@ -75,7 +75,7 @@ export default function Signup() {
                                 className="cred-input"
                                 value={confirmPassword}
                                 autoComplete="new-password"
-                                onChange={(e) => { e.target.value }}
+                                onChange={(e) => { setConfirmPassword(e.target.value) }}
                                 placeholder="Confirm your password"
                                 required />
                         </div>
