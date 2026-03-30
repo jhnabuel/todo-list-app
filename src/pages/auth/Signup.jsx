@@ -47,11 +47,41 @@ export default function Signup() {
 
     if (confirmed) {
         return (
-            <div>
-                <h1>Check your email</h1>
-                <p>We sent a confirmation link to <strong>{email}</strong>.</p>
-                <p>Click it to activate your account then sign in.</p>
-                <Link to="/login">Back to sign in</Link>
+            <div className="flex min-h-screen flex-col items-center justify-center bg-stone-50 px-6">
+                <div className="w-full max-w-sm bg-white border border-stone-200 rounded-2xl px-9 py-10 text-center">
+
+
+                    <div className="w-12 h-12 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-5">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M4 10l4.5 4.5 7.5-8" stroke="#2D7D5A" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                    </div>
+
+                    <h1 className="font-serif text-2xl text-stone-900 tracking-tight mb-2">
+                        Check your email
+                    </h1>
+
+
+                    <p className="text-sm text-stone-500 mb-1">
+                        We sent a confirmation link to
+                    </p>
+                    <p className="font-mono text-xs bg-stone-50 border border-stone-200 text-stone-700 px-3 py-2 rounded-lg inline-block mb-6">
+                        {email}
+                    </p>
+
+                    <p className="text-sm text-stone-400 mb-6">
+                        Click it to activate your account then sign in.
+                    </p>
+
+
+                    <Link
+                        to="/login"
+                        className="block w-full py-2.5 px-4 bg-stone-900 text-white text-sm font-medium rounded-lg text-center transition-all duration-150 hover:bg-stone-700"
+                    >
+                        Back to sign in
+                    </Link>
+
+                </div>
             </div>
         );
     }
