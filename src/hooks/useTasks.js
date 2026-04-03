@@ -7,7 +7,18 @@ export function useTasks() {
 
     async function loadUsers() {
         setLoading(true);
-
-
+        const { data } = await getTasks();
+        setTasks(data || []);
+        setLoading(false);
     }
+
+    useEffect(() => {
+        loadUsers();
+    }, []);
+
+
+    return {
+        tasks,
+        loading
+    };
 }

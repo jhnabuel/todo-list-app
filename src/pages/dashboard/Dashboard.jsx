@@ -1,27 +1,18 @@
-import { getTasks } from "../../services/tasks"
+import { useTasks } from "../../hooks/useTasks";
 import { useEffect, useState } from "react"
 
 export default function DashBoard() {
-    const [tasks, setTasks] = useState([]);
 
-    useEffect(() => {
-        fetchTasks()
-    }, [])
-
-    async function fetchTasks() {
-        const { data } = await getTasks();
-        setTasks(data || []);
-
-    }
+    const { tasks } = useTasks();
 
     return (
         <>
-            <p>welcome to dashboard!</p>
-           <ul>
+            <p>Welcome to dashboard!</p>
+            <ul>
                 {tasks.map((task) => (
                     <li key={task.id}>{task.title}</li>
                 ))}
-           </ul>
+            </ul>
         </>
     )
 }
