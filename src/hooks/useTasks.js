@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getTasks } from "../services/tasks";
+import { createTasks, getTasks } from "../services/tasks";
 
 export function useTasks() {
     const [tasks, setTasks] = useState([]);
@@ -10,6 +10,11 @@ export function useTasks() {
         const { data } = await getTasks();
         setTasks(data || []);
         setLoading(false);
+    }
+
+    async function createTasks() {
+        setLoading(true)
+        const { data } = await createTasks({ title: "Test task" })
     }
 
     useEffect(() => {

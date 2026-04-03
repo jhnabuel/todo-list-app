@@ -17,3 +17,21 @@ export const getTasks = async () => {
     };
 }
 
+export const createTasks = async (taskData) => {
+    const { data, error } = await supabase
+        .from('tasks')
+        .insert([taskData])
+        .select()
+        .single()
+    if (error) {
+        return {
+            data: null,
+            error: error.message
+        };
+    }
+    return {
+        data,
+        error: null
+    };
+}
+
