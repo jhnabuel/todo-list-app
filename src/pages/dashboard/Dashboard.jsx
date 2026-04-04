@@ -1,27 +1,48 @@
-import { createTasks } from "../../services/tasks";
+import { createTasks, deleteTasks } from "../../services/tasks";
 import { useTasks } from "../../hooks/useTasks";
 import { useEffect, useState } from "react"
 
 export default function DashBoard() {
 
-    const { tasks } = useTasks();
+    const { tasks, removeTask } = useTasks();
 
 
-    async function handleTest() {
-        const result = await createTasks({ title: "Test task 2: electric boogaloo" });
-        console.log(result)
+    async function handleTest(id) {
+        removeTask(id);
     }
+
     return (
         <>
             <p>Welcome to dashboard!</p>
-            <ul>
 
-                {tasks.map((task) => (
-                    <li key={task.id}>{task.title}</li>
-                ))}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Task Title</th>
+                        <th>Task Due Date</th>
+                        <th>Task Priority</th>
+                        <th>Task Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {tasks.map((task) => (
+                        <tr key={task.id}>
+                            <td>{task.title}</td>
+                            <td>{task.due_date}</td>
+                            <td>{task.priority}</td>
+                            <td>{task.status}</td>
+                            <td>
+                                <button className="bg-red-500 hover:bg-red-700" onClick={() => handleTest(task.id)}>Delete</button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
 
-                <button className="bg-blue-500 hover:bg-blue-700" onClick={handleTest}>Test Add Task</button>
-            </ul>
+
+
+            <button className="bg-blue-500 hover:bg-blue-700" onClick={handleTest}>Test Add Task</button>
+
         </>
     )
 }

@@ -35,3 +35,18 @@ export const createTasks = async (taskData) => {
     };
 }
 
+
+export const deleteTasks = async (id) => {
+    const { error } = await supabase
+        .from('tasks')
+        .delete()
+        .eq('id', id)
+    if (error) {
+        return {
+            error: error.message
+        }
+    }
+    return {
+        error: null
+    }
+}
