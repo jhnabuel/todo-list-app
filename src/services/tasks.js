@@ -50,3 +50,29 @@ export const deleteTasks = async (id) => {
         error: null
     }
 }
+
+export const updateTask = async (id, taskData) => {
+
+    const { id: _, created_at, updated_at, ...safeData } = taskData;
+
+    const { data, error } = await supabase
+        .from("tasks")
+        .update({
+            ...safeData,
+            updated_at: new Date().toISOString()
+        })
+        .eq("id", id)
+        .select()
+        .single();
+    if (error) {
+        return {
+            error: error.message,
+            data: null
+        }
+    }
+    return {
+        data,
+        error: null
+    }
+}
+

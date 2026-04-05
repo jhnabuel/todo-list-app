@@ -4,11 +4,16 @@ import { useEffect, useState } from "react"
 
 export default function DashBoard() {
 
-    const { tasks, removeTask } = useTasks();
+    const { tasks, removeTask, saveTask } = useTasks();
 
 
     async function handleTest(id) {
         removeTask(id);
+    }
+
+    async function handleEdit(task) {
+        const updated = { ...task, status: "completed" }
+        saveTask(updated, task)
     }
 
     return (
@@ -33,6 +38,7 @@ export default function DashBoard() {
                             <td>{task.status}</td>
                             <td>
                                 <button className="bg-red-500 hover:bg-red-700" onClick={() => handleTest(task.id)}>Delete</button>
+                                <button className="bg-yellow-500 hover:bg-yellow-700" onClick={() => handleEdit(task)}>Edit</button>
                             </td>
                         </tr>
                     ))}
