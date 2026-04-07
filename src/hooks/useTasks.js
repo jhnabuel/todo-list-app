@@ -40,6 +40,7 @@ export function useTasks() {
             return
         }
         setTasks(prev => prev.filter(t => t.id !== task_id));
+        setLoading(false);
     }
 
     useEffect(() => {
