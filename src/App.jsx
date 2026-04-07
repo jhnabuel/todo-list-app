@@ -2,7 +2,7 @@ import { useState } from 'react'
 import Login from './pages/auth/Login'
 import Signup from './pages/auth/Signup'
 import ProtectedRoute from './components/ProtectedRoute'
-import DashBoard from './pages/dashboard/Dashboard'
+import DashBoard from './pages/dashboard'
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
 
 function App() {
