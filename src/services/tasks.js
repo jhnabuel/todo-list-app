@@ -52,7 +52,6 @@ export const deleteTasks = async (id) => {
 }
 
 export const updateTask = async (id, taskData) => {
-
     const { id: _, created_at, updated_at, ...safeData } = taskData;
 
     const { data, error } = await supabase
@@ -76,3 +75,12 @@ export const updateTask = async (id, taskData) => {
     }
 }
 
+export const getTaskById = async (id) => {
+    const { data, error } = await supabase
+        .from("tasks")
+        .select("*")
+        .eq('id', id)
+        .single();
+    if (error) return { data: null, error: error.message };
+    return { data, error: null }
+}

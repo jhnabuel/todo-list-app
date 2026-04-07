@@ -4,29 +4,39 @@ import { createTasks, getTasks, deleteTasks, updateTask } from "../services/task
 export function useTasks() {
     const [tasks, setTasks] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     async function loadTasks() {
         setLoading(true);
-        const { data } = await getTasks();
+        const { data, error } = await getTasks();
+        if (error) setError(error);
         setTasks(data || []);
         setLoading(false);
     }
 
     async function saveTask(task, selectedTask) {
+        setLoading(true);
         if (selectedTask) {
             const { data, error } = await updateTask(selectedTask.id, task);
-            console.log(error)
+            if (error) setError(error);
             if (!error) setTasks(prev => prev.map(t => t.id === selectedTask.id ? data : t));
         } else {
             const { data, error } = await createTasks(task);
+            if (error) setError(error);
             if (!error) setTasks(prev => [...prev, data]);
         }
+        setLoading(false);
     }
 
     async function removeTask(task_id) {
         setLoading(true)
-        await deleteTasks(task_id);
-        await loadTasks();
+        const { error } = await deleteTasks(task_id);
+        if (error) {
+            setLoading(false);
+            setError(error)
+            return
+        }
+        setTasks(prev => prev.filter(t => t.id !== task_id));
     }
 
     useEffect(() => {
@@ -37,6 +47,7 @@ export function useTasks() {
     return {
         tasks,
         loading,
+        error,
         saveTask,
         removeTask,
         loadTasks
