@@ -8,6 +8,7 @@ export function useTasks() {
 
     async function loadTasks() {
         setLoading(true);
+        setError(null);
         const { data, error } = await getTasks();
         if (error) setError(error);
         setTasks(data || []);
@@ -16,6 +17,7 @@ export function useTasks() {
 
     async function saveTask(task, selectedTask) {
         setLoading(true);
+        setError(null);
         if (selectedTask) {
             const { data, error } = await updateTask(selectedTask.id, task);
             if (error) setError(error);
@@ -30,6 +32,7 @@ export function useTasks() {
 
     async function removeTask(task_id) {
         setLoading(true)
+        setError(null);
         const { error } = await deleteTasks(task_id);
         if (error) {
             setLoading(false);
