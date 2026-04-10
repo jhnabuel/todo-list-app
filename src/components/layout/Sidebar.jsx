@@ -4,8 +4,8 @@ import { useAuth } from "../../context/AuthContext";
 export default function Sidebar() {
     const { user, logout } = useAuth();
 
-    const initials = user?.user_metadata?.first_name?.[0] + user?.user_metadata?.last_name[0] || U;
-    const fullName = `${user?.user_metadata?.first_name || ''} ${user?.user_metadata?.last_name || ''}`.trim();
+    const initials = (user?.user_metadata?.first_name?.[0]) + (user?.user_metadata?.last_name[0]) || U;
+    const fullName = `${user?.user_metadata?.first_name ?? ''} ${user?.user_metadata?.last_name ?? ''}`.trim();
 
     return (
         <>
@@ -22,7 +22,7 @@ export default function Sidebar() {
 
                 </div>
 
-                <nav nav className="flex-1 overflow-y-auto p-3 space-y-0.5">
+                <nav className="flex-1 overflow-y-auto p-3 space-y-0.5">
                     <ul>
                         <p className="font-mono text-[10px] uppercase tracking-widest text-stone-400 px-2 py-1 mt-1">
                             Views
