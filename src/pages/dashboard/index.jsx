@@ -8,7 +8,7 @@ export default function DashBoard() {
     return (
         <>
             <AppLayout>
-
+                <p className="text-sm text-stone-400 font-mono">Tasks will appear here.</p>
             </AppLayout>
 
         </>
