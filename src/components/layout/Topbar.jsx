@@ -1,4 +1,4 @@
-export default function Topbar() {
+export default function Topbar({ onNewTask }) {
     return (
         <>
             <header className="h-14 min-h-14 bg-white border-b border-stone-200 flex items-center px-6 gap-4">
@@ -20,7 +20,8 @@ export default function Topbar() {
                 </div>
 
                 {/* New Task button — no handler yet */}
-                <button className="flex items-center gap-2 px-3 py-1.5 bg-stone-900 text-white text-sm font-medium rounded-lg hover:bg-stone-700 transition-colors duration-150">
+                <button className="flex items-center gap-2 px-3 py-1.5 bg-stone-900 text-white text-sm font-medium rounded-lg hover:bg-stone-700 transition-colors duration-150"
+                    onClick={onNewTask}>
                     <span>+</span>
                     New Task
                 </button>
