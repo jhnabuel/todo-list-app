@@ -73,7 +73,7 @@ export default function TaskModal({ isOpen, onClose, onSubmit, task }) {
                                 >
                                     <option value="todo">To-Do</option>
                                     <option value="in_progress">In Progress</option>
-                                    <option value="done">Done</option>
+                                    <option value="completed">Done</option>
                                 </select>
                             </div>
 
