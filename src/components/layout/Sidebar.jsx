@@ -1,7 +1,7 @@
 import { useAuth } from "../../context/AuthContext";
 
 
-export default function Sidebar() {
+export default function Sidebar({ onNewTask }) {
     const { user, logout } = useAuth();
 
     const initials = (user?.user_metadata?.first_name?.[0]) + (user?.user_metadata?.last_name[0]) || U;
@@ -52,7 +52,8 @@ export default function Sidebar() {
                 </nav>
 
                 <div className="p-3 border-t border-stone-200 space-y-1">
-                    <button className="w-full flex items-center gap-2 px-2 py-1.5 rounded-lg text-sm text-stone-600 hover:bg-stone-200 transition-colors duration-100">
+                    <button className="w-full flex items-center gap-2 px-2 py-1.5 rounded-lg text-sm text-stone-600 hover:bg-stone-200 transition-colors duration-100
+                            " onClick={onNewTask}>
                         <span className="text-stone-400">+</span>
                         New Task
                     </button>

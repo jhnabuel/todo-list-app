@@ -18,9 +18,10 @@ export const getTasks = async () => {
 }
 
 export const createTasks = async (taskData) => {
+    const { data: { user } } = await supabase.auth.getUser();
     const { data, error } = await supabase
         .from('tasks')
-        .insert([taskData])
+        .insert([{ ...taskData, user_id: user.id }])
         .select()
         .single()
     if (error) {
