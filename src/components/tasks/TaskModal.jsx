@@ -8,10 +8,31 @@ const emptyForm = {
     due_date: '',
 };
 
-export default function TaskModal({ isOpen, onClose, onSubmit, task }) {
-    const isEditing = !!task;
-    const { register, handleSubmit, reset, formState: { errors } } = useForm();
+export default function TaskModal({ isOpen, onClose, onSubmit, selectedTask }) {
+    const isEditing = !!selectedTask;
+
+    const { register, handleSubmit, reset, formState: { errors } } = useForm({
+        defaultValues: emptyForm
+    });
+
+    useEffect(() => {
+        if (selectedTask) {
+            reset({
+                title: selectedTask.title || '',
+                description: selectedTask.description || '',
+                priority: selectedTask.priority || 'medium',
+                status: selectedTask.status || 'todo',
+                due_date: selectedTask.due_date
+                    ? selectedTask.due_date.split('T')[0]
+                    : '',
+            });
+        } else {
+            reset(emptyForm);
+        }
+    }, [selectedTask, isOpen])
+
     if (!isOpen) return null;
+
     return (
         <>
             <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4">
@@ -73,7 +94,7 @@ export default function TaskModal({ isOpen, onClose, onSubmit, task }) {
                                 >
                                     <option value="todo">To-Do</option>
                                     <option value="in_progress">In Progress</option>
-                                    <option value="completed">Done</option>
+                                    <option value="completed">Completed</option>
                                 </select>
                             </div>
 

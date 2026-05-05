@@ -25,6 +25,11 @@ export default function DashBoard() {
         setSelectedTask(null);
     }
 
+    const handleEdit = (task) => {
+        setEditingTask(task);
+        setModalOpen(true);
+    };
+
     const handleDelete = async (id) => {
         if (!window.confirm('Are you sure you want to delete this task?')) return;
         await removeTask(id);
@@ -43,7 +48,7 @@ export default function DashBoard() {
                 <TaskList
                     tasks={tasks}
                     loading={loading}
-                    onEdit={openModal}
+                    onEdit={handleEdit}
                     onDelete={handleDelete}
                     onToggle={handleToggle}
                 />
