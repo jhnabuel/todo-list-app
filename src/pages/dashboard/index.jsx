@@ -37,7 +37,7 @@ export default function DashBoard() {
 
     const handleToggle = async (id, currentStatus) => {
         await saveTask({
-            status: currentStatus === 'done' ? 'todo' : 'done'
+            status: currentStatus === 'completed' ? 'todo' : 'completed'
         }, { id });
     };
 
