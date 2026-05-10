@@ -20,9 +20,6 @@ export function useLists() {
         setLists(data || []);
         setLoading(false);
     }
-    useEffect(() => {
-        loadLists();
-    }, [])
 
     async function saveList(list, selectedList) {
         setError(null)
@@ -37,6 +34,23 @@ export function useLists() {
         }
         setLoading(false);
     }
+
+    async function removeList(list_id) {
+        setLoading(true)
+        setError(null);
+        const { error } = await deleteList(list_id);
+        if (error) {
+            setLoading(false);
+            setError(error)
+            return
+        }
+        setLists(prev => prev.filter(l => l.id !== list_id));
+    }
+
+    useEffect(() => {
+        loadLists();
+    }, []);
+
     return {
         lists,
         loading,
