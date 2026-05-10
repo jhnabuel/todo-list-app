@@ -19,9 +19,10 @@ export const getList = async () => {
 
 
 export const createList = async (listData) => {
+    const { data: { user } } = await supabase.auth.getUser();
     const { data, error } = await supabase
         .from('projects')
-        .insert([listData])
+        .insert([{ ...listData, user_id: user.id }])
         .select()
         .single();
 
@@ -39,7 +40,7 @@ export const deleteList = async (id) => {
     return { error: null }
 }
 
-export const updatelist = async (id, listData) => {
+export const updateList = async (id, listData) => {
     const { data, error } = await supabase
         .from('projects')
         .update(listData)
