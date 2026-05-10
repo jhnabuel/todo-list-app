@@ -11,10 +11,6 @@ export default function DashBoard() {
     const [editingTask, setEditingTask] = useState(null);
     const { lists } = useLists();
 
-    useEffect(() => {
-        console.log('lists:', lists);
-    }, [lists]);
-
     const openModal = (task = null) => {
         setEditingTask(task);
         setModalOpen(true);
@@ -63,7 +59,9 @@ export default function DashBoard() {
                     isOpen={modalOpen}
                     onClose={closeModal}
                     onSubmit={handleModalSubmit}
-                    selectedTask={editingTask} />
+                    selectedTask={editingTask}
+                    lists={lists}
+                />
             </AppLayout>
         </>
     )

@@ -8,7 +8,7 @@ const emptyForm = {
     due_date: '',
 };
 
-export default function TaskModal({ isOpen, onClose, onSubmit, selectedTask }) {
+export default function TaskModal({ isOpen, onClose, onSubmit, selectedTask, lists }) {
     const isEditing = !!selectedTask;
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm({
@@ -111,14 +111,31 @@ export default function TaskModal({ isOpen, onClose, onSubmit, selectedTask }) {
                             </div>
                         </div>
 
-                        <div className="flex flex-col gap-1.5">
-                            <label className="text-[11px] font-medium text-stone-500 tracking-wide">Due date</label>
-                            <input
-                                type="date"
-                                className="w-full px-2.5 py-2 text-[13px] border border-stone-200 rounded-lg focus:outline-none focus:border-stone-400 text-stone-800"
-                                {...register("due_date")}
-                            />
+                        <div className="grid grid-cols-2 gap-2.5">
+                            <div className="flex flex-col gap-1.5">
+                                <label className="text-[11px] font-medium text-stone-500 tracking-wide">Due date</label>
+                                <input
+                                    type="date"
+                                    className="w-full px-2.5 py-2 text-[13px] border border-stone-200 rounded-lg focus:outline-none focus:border-stone-400 text-stone-800"
+                                    {...register("due_date")}
+                                />
+                            </div>
+
+                            <div className="flex flex-col gap-1.5">
+                                <label className="text-[11px] font-medium text-stone-500 tracking-wide">List</label>
+                                <select
+                                    className="w-full px-2.5 py-2 text-[13px] border border-stone-200 rounded-lg focus:outline-none focus:border-stone-400 text-stone-800"
+                                    {...register("project_id")}
+                                >
+                                    <option value="">No List</option>
+                                    {lists.map(list => (
+                                        <option key={list.id} value={list.id}>{list.name}</option>
+                                    ))}
+
+                                </select>
+                            </div>
                         </div>
+
 
                         {/* Footer */}
                         <div className="flex justify-end gap-2 pt-3 border-t border-stone-100">

@@ -1,8 +1,9 @@
 import { useAuth } from "../../context/AuthContext";
-
+import { useLists } from "../../hooks/useLists";
 
 export default function Sidebar({ onNewTask }) {
     const { user, logout } = useAuth();
+    const { lists } = useLists();
 
     const initials = (user?.user_metadata?.first_name?.[0]) + (user?.user_metadata?.last_name[0]) || U;
     const fullName = `${user?.user_metadata?.first_name ?? ''} ${user?.user_metadata?.last_name ?? ''}`.trim();
@@ -39,15 +40,12 @@ export default function Sidebar({ onNewTask }) {
                             Lists
                         </p>
 
-                        {[{ label: 'Personal' },
-                        { label: 'Academics' },
-                        { label: 'Extracurriculars' },
-                        { label: 'Reading' },
-                        { label: 'Health' }
-                        ].map(item => (<div key={item.label} className="flex font-sans items-center gap-2 px-2 py-1.5 rounded-lg text-sm text-stone-600 hover:bg-stone-200 cursor-pointer transition-colors duration-100">
-                            {item.label}
-                        </div>))}
-
+                        {lists.map(list => (
+                            <div key={list.id} className="nav-item">
+                                <span className="w-2 h-2 rounded-full" style={{ background: list.color }} />
+                                {list.name}
+                            </div>
+                        ))}
                     </ul>
                 </nav>
 
