@@ -1,13 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTasks } from "../../hooks/useTasks";
 import AppLayout from "../../components/layout/AppLayout";
 import TaskList from "../../components/tasks/TaskList";
 import TaskModal from "../../components/tasks/TaskModal";
+import { useLists } from "../../hooks/useLists";
 
 export default function DashBoard() {
     const [modalOpen, setModalOpen] = useState(false);
     const { tasks, loading, saveTask, removeTask } = useTasks();
     const [editingTask, setEditingTask] = useState(null);
+    const { lists } = useLists();
+
+    useEffect(() => {
+        console.log('lists:', lists);
+    }, [lists]);
 
     const openModal = (task = null) => {
         setEditingTask(task);
