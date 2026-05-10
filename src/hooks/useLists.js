@@ -24,5 +24,23 @@ export function useLists() {
         loadLists();
     }, [])
 
-    return { lists }
+    async function saveList(list, selectedList) {
+        setError(null)
+        if (selectedList) {
+            const { data, error } = await updateList(selectedList.id, list);
+            if (error) setError(error);
+            if (!error) setTasks(prev => prev.map(l => l.id == selectedList.id ? data : l));
+        } else {
+            const { data, error } = await createList(list);
+            if (error) setError(error);
+            if (!error) setLists(prev => [...prev, data]);
+        }
+        setLoading(false);
+    }
+    return {
+        lists,
+        loading,
+        error,
+        saveList
+    }
 }
