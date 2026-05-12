@@ -55,6 +55,7 @@ export function useLists() {
         lists,
         loading,
         error,
-        saveList
+        saveList,
+        removeList
     }
 }

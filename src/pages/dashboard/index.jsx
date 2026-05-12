@@ -1,16 +1,27 @@
 import { useState, useEffect } from "react";
 import { useTasks } from "../../hooks/useTasks";
+import { useLists } from "../../hooks/useLists";
 import AppLayout from "../../components/layout/AppLayout";
 import TaskList from "../../components/tasks/TaskList";
 import TaskModal from "../../components/tasks/TaskModal";
-import { useLists } from "../../hooks/useLists";
+import ListModal from "../../components/lists/ListModal";
 
 export default function DashBoard() {
-    const [modalOpen, setModalOpen] = useState(false);
+    // task hook
     const { tasks, loading, saveTask, removeTask } = useTasks();
-    const [editingTask, setEditingTask] = useState(null);
-    const { lists } = useLists();
 
+    // list hook
+    const { lists, saveList, removeList } = useLists();
+
+    // task modal state
+    const [modalOpen, setModalOpen] = useState(false);
+    const [editingTask, setEditingTask] = useState(null);
+
+    // list modal state
+    const [listModalOpen, setListModalOpen] = useState(false);
+    const [editingList, setEditingList] = useState(null);
+
+    // task handlers
     const openModal = (task = null) => {
         setEditingTask(task);
         setModalOpen(true);
@@ -44,9 +55,20 @@ export default function DashBoard() {
     };
 
 
+    // list handlers
+    const openListModal = (list = null) => {
+        setEditingList(list);
+        setListModalOpen(true);
+    }
+
+    const closeListModal = () => {
+        setListModalOpen(false);
+        setEditingList(null);
+    }
+
     return (
         <>
-            <AppLayout onNewTask={() => openModal()}>
+            <AppLayout onNewTask={() => openModal()} onNewList={() => openListModal()}>
                 <TaskList
                     tasks={tasks}
                     loading={loading}
@@ -61,6 +83,12 @@ export default function DashBoard() {
                     onSubmit={handleModalSubmit}
                     selectedTask={editingTask}
                     lists={lists}
+                />
+
+                <ListModal
+                    isOpen={listModalOpen}
+                    onClose={closeListModal}
+                    selectedList={editingList}
                 />
             </AppLayout>
         </>

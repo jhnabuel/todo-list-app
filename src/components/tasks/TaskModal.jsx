@@ -35,7 +35,7 @@ export default function TaskModal({ isOpen, onClose, onSubmit, selectedTask, lis
 
     return (
         <>
-            <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4">
+            <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
                 <div className="bg-white border border-stone-200 rounded-xl w-full max-w-[460px]">
 
                     {/* Header */}
