@@ -1,7 +1,7 @@
 import { useAuth } from "../../context/AuthContext";
 import { useLists } from "../../hooks/useLists";
 
-export default function Sidebar({ onNewTask, onEditList, lists }) {
+export default function Sidebar({ onNewTask, onEditList, onDeleteList, lists }) {
     const { user, logout } = useAuth();
 
     const initials = (user?.user_metadata?.first_name?.[0]) + (user?.user_metadata?.last_name[0]) || U;
@@ -57,7 +57,8 @@ export default function Sidebar({ onNewTask, onEditList, lists }) {
                                                 strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                                         </svg>
                                     </button>
-                                    <button className="p-1 rounded text-stone-400 hover:text-red-600 hover:bg-red-50 transition-all">
+                                    <button onClick={(e) => { e.stopPropagation(); onDeleteList(list.id) }}
+                                        className="p-1 rounded text-stone-400 hover:text-red-600 hover:bg-red-50 transition-all">
                                         <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
                                             <path d="M2 3h8M4 3V2h4v1M5 5.5v3M7 5.5v3M3 3l.7 7h4.6L9 3"
                                                 stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />

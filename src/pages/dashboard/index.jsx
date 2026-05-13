@@ -71,11 +71,17 @@ export default function DashBoard() {
         setEditingList(null);
     }
 
+    const handleDeleteList = async (id) => {
+        if (!window.confirm('Delete this list? Tasks inside will become unassigned.')) return;
+        await removeList(id);
+    };
+
     return (
         <>
             <AppLayout onNewTask={() => openModal()}
                 onNewList={() => openListModal()}
                 onEditList={openListModal}
+                onDeleteList={handleDeleteList}
                 lists={lists}>
 
                 <TaskList
