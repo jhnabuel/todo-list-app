@@ -1,9 +1,8 @@
 import { useAuth } from "../../context/AuthContext";
 import { useLists } from "../../hooks/useLists";
 
-export default function Sidebar({ onNewTask }) {
+export default function Sidebar({ onNewTask, onEditList, lists }) {
     const { user, logout } = useAuth();
-    const { lists } = useLists();
 
     const initials = (user?.user_metadata?.first_name?.[0]) + (user?.user_metadata?.last_name[0]) || U;
     const fullName = `${user?.user_metadata?.first_name ?? ''} ${user?.user_metadata?.last_name ?? ''}`.trim();
@@ -52,7 +51,7 @@ export default function Sidebar({ onNewTask }) {
                                 </span>
 
                                 <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-100">
-                                    <button className="p-1 rounded text-stone-400 hover:text-stone-700 hover:bg-stone-300 transition-all">
+                                    <button onClick={(e) => { e.stopPropagation(); onEditList(list) }} className="p-1 rounded text-stone-400 hover:text-stone-700 hover:bg-stone-300 transition-all">
                                         <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
                                             <path d="M8 2l2 2-6 6H2V8l6-6z" stroke="currentColor"
                                                 strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />

@@ -35,7 +35,6 @@ export default function DashBoard() {
     const handleModalSubmit = async (formData) => {
         await saveTask(formData, editingTask);
         closeModal();
-        setSelectedTask(null);
     }
 
     const handleEdit = (task) => {
@@ -66,9 +65,19 @@ export default function DashBoard() {
         setEditingList(null);
     }
 
+    const handleListModalSubmit = async (formData) => {
+        await saveList(formData, editingList);
+        closeListModal
+        setEditingList(null);
+    }
+
     return (
         <>
-            <AppLayout onNewTask={() => openModal()} onNewList={() => openListModal()}>
+            <AppLayout onNewTask={() => openModal()}
+                onNewList={() => openListModal()}
+                onEditList={openListModal}
+                lists={lists}>
+
                 <TaskList
                     tasks={tasks}
                     loading={loading}
@@ -88,6 +97,7 @@ export default function DashBoard() {
                 <ListModal
                     isOpen={listModalOpen}
                     onClose={closeListModal}
+                    onSubmit={handleListModalSubmit}
                     selectedList={editingList}
                 />
             </AppLayout>

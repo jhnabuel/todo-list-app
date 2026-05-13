@@ -26,7 +26,7 @@ export function useLists() {
         if (selectedList) {
             const { data, error } = await updateList(selectedList.id, list);
             if (error) setError(error);
-            if (!error) setTasks(prev => prev.map(l => l.id == selectedList.id ? data : l));
+            if (!error) setLists(prev => prev.map(l => l.id == selectedList.id ? data : l));
         } else {
             const { data, error } = await createList(list);
             if (error) setError(error);

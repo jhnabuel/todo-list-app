@@ -14,6 +14,14 @@ export default function ListModal({ isOpen, onClose, onSubmit, selectedList }) {
         defaultValues: { name: '', color: '#E85D26' }
     });
 
+    useEffect(() => {
+        if (selectedList) {
+            reset({ name: selectedList.name, color: selectedList.color });
+        } else {
+            reset({ name: '', color: '#E85D26' });
+        }
+    }, [selectedList, isOpen]);
+
     if (!isOpen) return null;
 
     const selectedColor = watch('color');
@@ -42,7 +50,7 @@ export default function ListModal({ isOpen, onClose, onSubmit, selectedList }) {
                 </div>
 
                 {/* Form */}
-                <form className="px-6 py-5 space-y-5">
+                <form onSubmit={handleSubmit(onSubmit)} className="px-6 py-5 space-y-5">
 
                     {/* Name */}
                     <div className="space-y-1.5">
