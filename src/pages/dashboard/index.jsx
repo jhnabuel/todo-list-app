@@ -7,6 +7,8 @@ import TaskModal from "../../components/tasks/TaskModal";
 import ListModal from "../../components/lists/ListModal";
 
 export default function DashBoard() {
+    const [activeList, setActiveList] = useState(null);
+
     // task hook
     const { tasks, loading, saveTask, removeTask } = useTasks();
 
@@ -76,16 +78,29 @@ export default function DashBoard() {
         await removeList(id);
     };
 
+    const handleSelectList = (id) => {
+        setActiveList(id);
+    };
+
+    const filteredTasks = activeList
+        ? tasks.filter(t => t.project_id === activeList)
+        : tasks;
+
+    const activeListName = lists.find(l => l.id === activeList)?.name;
+
     return (
         <>
             <AppLayout onNewTask={() => openModal()}
                 onNewList={() => openListModal()}
                 onEditList={openListModal}
                 onDeleteList={handleDeleteList}
-                lists={lists}>
+                lists={lists}
+                activeList={activeList}
+                onSelectList={(id) => setActiveList(id)}
+                topbarTitle={activeListName || 'All Tasks'}>
 
                 <TaskList
-                    tasks={tasks}
+                    tasks={filteredTasks}
                     loading={loading}
                     onEdit={handleEdit}
                     onDelete={handleDelete}

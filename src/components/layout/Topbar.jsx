@@ -1,8 +1,8 @@
-export default function Topbar({ onNewTask, onNewList }) {
+export default function Topbar({ onNewTask, onNewList, title }) {
     return (
         <>
             <header className="h-14 min-h-14 bg-white border-b border-stone-200 flex items-center px-6 gap-4">
-                <h1 className="font-serif text-xl text-stone-900 tracking-tight"> All Tasks</h1>
+                <h1 className="font-serif text-xl text-stone-900 tracking-tight">{title}</h1>
 
 
                 <div className="flex-1" />

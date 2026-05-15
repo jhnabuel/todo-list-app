@@ -1,7 +1,7 @@
 import { useAuth } from "../../context/AuthContext";
 import { useLists } from "../../hooks/useLists";
 
-export default function Sidebar({ onNewTask, onEditList, onDeleteList, lists }) {
+export default function Sidebar({ onNewTask, onEditList, onDeleteList, lists, activeList, onSelectList }) {
     const { user, logout } = useAuth();
 
     const initials = (user?.user_metadata?.first_name?.[0]) + (user?.user_metadata?.last_name[0]) || U;
@@ -40,7 +40,16 @@ export default function Sidebar({ onNewTask, onEditList, onDeleteList, lists }) 
                         </p>
 
                         {lists.map(list => (
-                            <div key={list.id} className="group flex items-center gap-2 px-2 py-1.5 rounded-lg hover:bg-stone-200 cursor-pointer">
+                            <div key={list.id}
+                                onClick={() => onSelectList(list.id)}
+                                className={`
+                            group flex items-center gap-2 px-2 py-1.5
+                            rounded-lg text-sm cursor-pointer transition-colors duration-100
+                            ${activeList === list.id
+                                        ? 'bg-stone-900 text-white'
+                                        : 'text-stone-600 hover:bg-stone-200'
+                                    }
+                        `}>
 
                                 <span className="w-2 h-2 rounded-full flex-shrink-0"
                                     style={{ background: list.color }} />
