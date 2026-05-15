@@ -1,4 +1,4 @@
-export default function Topbar({ onNewTask }) {
+export default function Topbar({ onNewTask, onNewList }) {
     return (
         <>
             <header className="h-14 min-h-14 bg-white border-b border-stone-200 flex items-center px-6 gap-4">
@@ -24,6 +24,12 @@ export default function Topbar({ onNewTask }) {
                     onClick={onNewTask}>
                     <span>+</span>
                     New Task
+                </button>
+
+                <button className="flex items-center gap-2 px-3 py-1.5 border-1 border-stone-200 text-stone-600 text-sm font-medium rounded-lg hover:bg-stone-200 transition-colors duration-150"
+                    onClick={onNewList}>
+                    <span>+</span>
+                    New List
                 </button>
             </header>
         </>

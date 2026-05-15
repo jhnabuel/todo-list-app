@@ -1,7 +1,7 @@
 import { useAuth } from "../../context/AuthContext";
+import { useLists } from "../../hooks/useLists";
 
-
-export default function Sidebar({ onNewTask }) {
+export default function Sidebar({ onNewTask, onEditList, onDeleteList, lists }) {
     const { user, logout } = useAuth();
 
     const initials = (user?.user_metadata?.first_name?.[0]) + (user?.user_metadata?.last_name[0]) || U;
@@ -39,15 +39,34 @@ export default function Sidebar({ onNewTask }) {
                             Lists
                         </p>
 
-                        {[{ label: 'Personal' },
-                        { label: 'Academics' },
-                        { label: 'Extracurriculars' },
-                        { label: 'Reading' },
-                        { label: 'Health' }
-                        ].map(item => (<div key={item.label} className="flex font-sans items-center gap-2 px-2 py-1.5 rounded-lg text-sm text-stone-600 hover:bg-stone-200 cursor-pointer transition-colors duration-100">
-                            {item.label}
-                        </div>))}
+                        {lists.map(list => (
+                            <div key={list.id} className="group flex items-center gap-2 px-2 py-1.5 rounded-lg hover:bg-stone-200 cursor-pointer">
 
+                                <span className="w-2 h-2 rounded-full flex-shrink-0"
+                                    style={{ background: list.color }} />
+
+
+                                <span className="flex-1 text-sm text-stone-600 truncate" >
+                                    {list.name}
+                                </span>
+
+                                <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-100">
+                                    <button onClick={(e) => { e.stopPropagation(); onEditList(list) }} className="p-1 rounded text-stone-400 hover:text-stone-700 hover:bg-stone-300 transition-all">
+                                        <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
+                                            <path d="M8 2l2 2-6 6H2V8l6-6z" stroke="currentColor"
+                                                strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                                        </svg>
+                                    </button>
+                                    <button onClick={(e) => { e.stopPropagation(); onDeleteList(list.id) }}
+                                        className="p-1 rounded text-stone-400 hover:text-red-600 hover:bg-red-50 transition-all">
+                                        <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
+                                            <path d="M2 3h8M4 3V2h4v1M5 5.5v3M7 5.5v3M3 3l.7 7h4.6L9 3"
+                                                stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
                     </ul>
                 </nav>
 

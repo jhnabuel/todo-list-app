@@ -1,20 +1,27 @@
 import { useState, useEffect } from "react";
 import { useTasks } from "../../hooks/useTasks";
+import { useLists } from "../../hooks/useLists";
 import AppLayout from "../../components/layout/AppLayout";
 import TaskList from "../../components/tasks/TaskList";
 import TaskModal from "../../components/tasks/TaskModal";
-import { useLists } from "../../hooks/useLists";
+import ListModal from "../../components/lists/ListModal";
 
 export default function DashBoard() {
-    const [modalOpen, setModalOpen] = useState(false);
+    // task hook
     const { tasks, loading, saveTask, removeTask } = useTasks();
+
+    // list hook
+    const { lists, saveList, removeList } = useLists();
+
+    // task modal state
+    const [modalOpen, setModalOpen] = useState(false);
     const [editingTask, setEditingTask] = useState(null);
-    const { lists } = useLists();
 
-    useEffect(() => {
-        console.log('lists:', lists);
-    }, [lists]);
+    // list modal state
+    const [listModalOpen, setListModalOpen] = useState(false);
+    const [editingList, setEditingList] = useState(null);
 
+    // task handlers
     const openModal = (task = null) => {
         setEditingTask(task);
         setModalOpen(true);
@@ -28,7 +35,6 @@ export default function DashBoard() {
     const handleModalSubmit = async (formData) => {
         await saveTask(formData, editingTask);
         closeModal();
-        setSelectedTask(null);
     }
 
     const handleEdit = (task) => {
@@ -48,9 +54,36 @@ export default function DashBoard() {
     };
 
 
+    // list handlers
+    const openListModal = (list = null) => {
+        setEditingList(list);
+        setListModalOpen(true);
+    }
+
+    const closeListModal = () => {
+        setListModalOpen(false);
+        setEditingList(null);
+    }
+
+    const handleListModalSubmit = async (formData) => {
+        await saveList(formData, editingList);
+        closeListModal
+        setEditingList(null);
+    }
+
+    const handleDeleteList = async (id) => {
+        if (!window.confirm('Delete this list? Tasks inside will become unassigned.')) return;
+        await removeList(id);
+    };
+
     return (
         <>
-            <AppLayout onNewTask={() => openModal()}>
+            <AppLayout onNewTask={() => openModal()}
+                onNewList={() => openListModal()}
+                onEditList={openListModal}
+                onDeleteList={handleDeleteList}
+                lists={lists}>
+
                 <TaskList
                     tasks={tasks}
                     loading={loading}
@@ -63,7 +96,16 @@ export default function DashBoard() {
                     isOpen={modalOpen}
                     onClose={closeModal}
                     onSubmit={handleModalSubmit}
-                    selectedTask={editingTask} />
+                    selectedTask={editingTask}
+                    lists={lists}
+                />
+
+                <ListModal
+                    isOpen={listModalOpen}
+                    onClose={closeListModal}
+                    onSubmit={handleListModalSubmit}
+                    selectedList={editingList}
+                />
             </AppLayout>
         </>
     )
